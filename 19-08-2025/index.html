@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kommi Lekha Sree — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #0f1216;        /* dark base */
+      --card: #131822;      /* card surface */
+      --muted: #8a93a4;     /* secondary text */
+      --text: #e8ecf1;      /* main text */
+      --accent: #66e3c4;    /* accent mint */
+      --accent-2:#8aa8ff;   /* accent blue */
+      --ring: rgba(102, 227, 196,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,.35), 0 1px 0 rgba(255,255,255,.04) inset;
+    }
+    :root.light{
+      --bg: #f3f6fb;
+      --card: #ffffff;
+      --muted: #637082;
+      --text: #121722;
+      --accent: #0abf9e;
+      --accent-2:#355cff;
+      --ring: rgba(11,191,158,.25);
+      --shadow: 0 10px 25px rgba(12,32,63,.10);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:radial-gradient(1200px 600px at 80% -10%,rgba(102,227,196,.10),transparent),
+      radial-gradient(1000px 500px at -10% 10%,rgba(138,168,255,.10),transparent), var(--bg);
+      color:var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .container{max-width:1100px; margin:0 auto; padding:26px 18px 96px}
+    .nav{display:flex; align-items:center; gap:14px; justify-content:space-between; position:sticky; top:0; backdrop-filter:saturate(180%) blur(8px); background:color-mix(in srgb, var(--bg) 92%, transparent); border-bottom:1px solid color-mix(in srgb,var(--text) 8%, transparent); padding:12px 18px; z-index:20}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.3px}
+    .logo{width:36px; height:36px; display:grid; place-items:center; border-radius:10px; background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0e1220; box-shadow:var(--shadow)}
+    .nav-actions{display:flex; gap:10px}
+    .btn{border:1px solid color-mix(in srgb, var(--text) 10%, transparent); background:var(--card); color:var(--text); padding:10px 14px; border-radius:12px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:8px; box-shadow:var(--shadow)}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#0b1020; border-color:transparent}
+
+    .hero{display:grid; grid-template-columns: 1.1fr .9fr; gap:28px; align-items:stretch; margin-top:28px}
+    @media (max-width: 880px){ .hero{grid-template-columns:1fr;}}
+    .card{background:linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, transparent), var(--card)); border:1px solid color-mix(in srgb, var(--text) 10%, transparent); border-radius:22px; padding:22px; box-shadow:var(--shadow)}
+    .headline{font-family:"Playfair Display", serif; font-size:40px; line-height:1.1; margin:4px 0 8px}
+    .subtitle{color:var(--muted); font-weight:500; margin-bottom:14px}
+    .tag{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; font-size:12px; border:1px solid color-mix(in srgb, var(--text) 12%, transparent); border-radius:999px; background:color-mix(in srgb, var(--card) 88%, transparent); margin:6px 6px 0 0}
+
+    .avatar{width:100%; aspect-ratio: 4/5; border-radius:18px; object-fit:cover; border:1px solid color-mix(in srgb, var(--text) 12%, transparent); box-shadow:var(--shadow)}
+    .contact{display:grid; gap:10px; margin-top:14px}
+    .contact a{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); border:1px solid color-mix(in srgb, var(--text) 10%, transparent); background:color-mix(in srgb, var(--card) 92%, transparent); padding:10px 12px; border-radius:12px}
+    .contact small{color:var(--muted)}
+
+    .section{margin-top:34px}
+    .section h2{font-size:22px; letter-spacing:.3px; margin:0 0 12px}
+    .grid{display:grid; gap:16px}
+
+    .skills{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{padding:8px 12px; border-radius:999px; border:1px solid color-mix(in srgb, var(--text) 12%, transparent); background:linear-gradient(180deg, color-mix(in srgb, var(--card) 92%, transparent), var(--card)); font-weight:600; font-size:13px}
+
+    .timeline{position:relative; display:grid; gap:14px; padding-left:18px}
+    .timeline::before{content:""; position:absolute; left:6px; top:4px; bottom:4px; width:2px; background:linear-gradient(var(--accent),var(--accent-2))}
+    .t-item{position:relative; padding:12px 14px; border:1px solid color-mix(in srgb, var(--text) 12%, transparent); border-radius:14px; background:var(--card)}
+    .t-item::before{content:""; position:absolute; left:-10px; top:16px; width:8px; height:8px; border-radius:999px; background:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:0 0 0 3px var(--ring)}
+    .t-meta{font-weight:700}
+    .t-sub{color:var(--muted); font-size:14px}
+
+    .project{display:grid; gap:10px; border:1px solid color-mix(in srgb, var(--text) 12%, transparent); border-radius:16px; padding:14px; background:var(--card)}
+    .project a{font-weight:700; text-decoration:none}
+    .project p{margin:0; color:var(--muted)}
+
+    .certs li{margin:6px 0}
+
+    footer{margin-top:40px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between; color:var(--muted)}
+
+    /* Responsive helpers */
+    @media (min-width: 881px){
+      .grid.cols-2{grid-template-columns: 1fr 1fr}
+      .grid.cols-3{grid-template-columns: repeat(3, 1fr)}
+    }
+
+    /* Print (for one-page resume export) */
+    @media print{
+      :root{--bg:#ffffff; --text:#111; --muted:#637082; --card:#fff; --accent:#111; --accent-2:#111}
+      .nav, .btn.print-hide, .contact a[href^="mailto"]::after{display:none !important}
+      .container{padding:0}
+      .card{box-shadow:none; border-color:#ddd}
+      body{background:#fff}
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navigation -->
+  <div class="nav">
+    <div class="brand">
+      <div class="logo">KS</div>
+      <div>Kommi Lekha Sree</div>
+    </div>
+    <div class="nav-actions">
+      <button class="btn print-hide" id="themeToggle" title="Toggle theme">Toggle Theme</button>
+      <a class="btn primary" href="#contact" title="Jump to contact">Contact</a>
+      <button class="btn print-hide" onclick="window.print()" title="Print or Save as PDF">Download Resume</button>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="card">
+        <div class="tag">Third‑Year B.E (CSE – Data Science)</div>
+        <h1 class="headline">Building intuitive web apps & data‑driven solutions</h1>
+        <p class="subtitle">I’m an aspiring engineer focused on modern web development, data analysis, and user‑centric design.
+          I enjoy turning complex problems into simple, beautiful, and performant experiences.</p>
+        <div class="skills">
+          <span class="chip">Java</span>
+          <span class="chip">Python</span>
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript (learning)</span>
+          <span class="chip">React (learning)</span>
+          <span class="chip">REST APIs</span>
+          <span class="chip">Data Structures & Algorithms</span>
+        </div>
+      </div>
+      <aside class="card">
+        <!-- Replace src with your hosted image URL if available -->
+      <img class="avatar" src="lekha.jpg" alt="Kommi Lekha Sree" />
+        <div class="contact">
+          <a href="tel:+919390135232">📞 +91 93901 35232</a>
+          <a href="mailto:kommilekhasreept@gmail.com">✉️ kommilekhasreept@gmail.com</a>
+          <a href="https://lekha0403.github.io" target="_blank" rel="noopener">🌐 Portfolio: lekha0403.github.io</a>
+          <a href="#map">📍 19-3-3E/1, Jaya Nagar, Tiruchanoor Road, Tirupati (Urban), Chittoor, AP 517501</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- EDUCATION & CERTS -->
+    <section class="section grid cols-2">
+      <div class="card">
+        <h2>Education</h2>
+        <div class="timeline">
+          <div class="t-item">
+            <div class="t-meta">Sathyabama University — B.E CSE (Data Science)</div>
+            <div class="t-sub">2023 – 2027 • Chennai, Tamil Nadu</div>
+          </div>
+          <div class="t-item">
+            <div class="t-meta">Narayana College — BIE</div>
+            <div class="t-sub">2021 – 2023 • Score: 81.1%</div>
+          </div>
+          <div class="t-item">
+            <div class="t-meta">Sri Chaitanya EM School — SSC</div>
+            <div class="t-sub">2016 – 2021 • Score: 99.9%</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Certificates</h2>
+        <ul class="certs">
+          <li>Python in ULearn</li>
+          <li>Java in ULearn</li>
+          <li>Introduction to Linear Algebra with MATLAB</li>
+        </ul>
+        <h2 class="section">Languages</h2>
+        <div class="skills">
+          <span class="chip">English</span>
+          <span class="chip">Telugu</span>
+          <span class="chip">Tamil</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS (Edit with your own links) -->
+    <section class="section">
+      <div class="card">
+        <h2>Projects</h2>
+        <div class="grid cols-3">
+          <div class="project">
+            <a href="https://lekha0403.github.io/Food_Delivery-_App/" target="_blank" rel="noopener">Food Delivery App</a>
+            <p>Responsive landing & ordering flow. Focus on clean UI, cards, and CTA hierarchy.</p>
+          </div>
+          <div class="project">
+            <a href="https://lekha0403.github.io/Rock_Paper_Scissor-/" target="_blank" rel="noopener">Rock • Paper • Scissor</a>
+            <p>Fun browser game with simple state handling and score logic.</p>
+          </div>
+          <div class="project">
+            <a href="https://lekha0403.github.io/To_Do_List/" target="_blank" rel="noopener">To‑Do List</a>
+            <p>Minimal task manager with add/delete and local storage.</p>
+          </div>
+          <div class="project">
+            <a href="https://lekha0403.github.io/XOX_Game/" target="_blank" rel="noopener">XOX Game</a>
+            <p>Tic‑Tac‑Toe variant emphasizing grid layout and responsive interactions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / PROFILE -->
+    <section class="section grid cols-2">
+      <div class="card">
+        <h2>Profile</h2>
+        <p>I am currently pursuing a Bachelor of Engineering (BE) in Computer Science and Engineering with a specialization in Data Science. Alongside my academic focus on data analysis, machine learning, and software development, I’m passionate about web development and have honed my skills in designing and developing user‑friendly websites using modern web technologies. I’m dedicated to leveraging both data‑driven solutions and intuitive web resources to address real‑world challenges and craft impactful digital experiences.</p>
+      </div>
+      <div class="card">
+        <h2>Contact Me</h2>
+        <form id="contact" class="grid" onsubmit="event.preventDefault(); alert('Thanks! Your message has been noted.'); this.reset();">
+          <input required name="name" placeholder="Your name" style="padding:12px;border-radius:12px;border:1px solid color-mix(in srgb, var(--text) 12%, transparent);background:var(--card);color:var(--text)" />
+          <input required type="email" name="email" placeholder="Your email" style="padding:12px;border-radius:12px;border:1px solid color-mix(in srgb, var(--text) 12%, transparent);background:var(--card);color:var(--text)" />
+          <textarea required name="msg" rows="4" placeholder="Your message" style="padding:12px;border-radius:12px;border:1px solid color-mix(in srgb, var(--text) 12%, transparent);background:var(--card);color:var(--text)"></textarea>
+          <button class="btn primary" type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>© <span id="year"></span> Kommi Lekha Sree • All rights reserved</div>
+      <div class="skills">
+        <span class="tag">Open to Internships</span>
+        <span class="tag">Chennai • Tirupati</span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if(saved === 'light'){ root.classList.add('light'); }
+    toggle.addEventListener('click', ()=>{
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+  <!-- HOW TO USE
+    1) Replace the placeholder profile image with your own hosted URL.
+    2) Edit contact details, project links, and texts above.
+    3) Click “Download Resume” to print or save as PDF (print styles included).
+    4) Toggle Theme for light/dark preview. Fully responsive down to mobile.
+  -->
+</body>
+</html>
