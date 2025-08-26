@@ -1,0 +1,55 @@
+CREATE DATABASE companyDB;
+USE companyDB;
+
+CREATE TABLE workers (
+    wid INT PRIMARY KEY,
+    wname VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    salary INT NOT NULL
+);
+
+INSERT INTO workers (wid, wname, department, salary) VALUES
+(1, 'Arjun', 'HR', 80000),
+(2, 'Meena', 'Admin', 150000),
+(3, 'Charan', 'IT', 120000),
+(4, 'Lekha', 'Finance', 250000),
+(5, 'Rahul', 'Marketing', 95000),
+(6, 'Joshi', 'Admin', 180000),
+(7, 'Divya', 'IT', 300000),
+(8, 'Ramesh', 'HR', 70000),
+(9, 'Sanjay', 'Sales', 280000),
+(10, 'Anjali', 'Finance', 320000);
+
+SELECT *
+FROM workers
+WHERE department NOT IN ('HR', 'Admin')
+  AND salary BETWEEN 70000 AND 300000;
+  
+  SELECT *
+FROM workers
+WHERE wname LIKE 'V%'
+  AND salary >= 200000;
+  
+  SELECT *
+FROM workers
+WHERE department <> 'Admin'
+  AND salary < 100000;
+SELECT AVG(salary) AS avg_salary_admin
+FROM workers
+WHERE department = 'Admin';
+
+SELECT SUM(salary) AS total_salary_hr_admin
+FROM workers
+WHERE department IN ('HR', 'Admin');
+
+SELECT COUNT(*) AS count_v_names
+FROM workers
+WHERE wname LIKE 'V%';
+
+SELECT SUM(salary) AS total_salary_range
+FROM workers
+WHERE salary BETWEEN 50000 AND 200000;
+
+
+
+
