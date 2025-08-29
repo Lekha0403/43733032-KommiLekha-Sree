@@ -1,0 +1,98 @@
+CREATE DATABASE companyDB;
+USE companyDB;
+
+CREATE TABLE workers (
+    wid INT PRIMARY KEY,
+    wname VARCHAR(50) NOT NULL,
+    department VARCHAR(50) NOT NULL,
+    salary INT NOT NULL
+);
+
+INSERT INTO workers (wid, wname, department, salary) VALUES
+(1, 'Arjun', 'HR', 80000),
+(2, 'Meena', 'Admin', 150000),
+(3, 'Charan', 'IT', 120000),
+(4, 'Lekha', 'Finance', 250000),
+(5, 'Rahul', 'Marketing', 95000),
+(6, 'Joshi', 'Admin', 180000),
+(7, 'Divya', 'IT', 300000),
+(8, 'Ramesh', 'HR', 70000),
+(9, 'Sanjay', 'Sales', 280000),
+(10, 'Anjali', 'Finance', 320000),
+(11, 'Varun', 'IT', 220000),
+(12, 'Vinay', 'Finance', 180000),
+(13, 'Vishal', 'Sales', 300000);
+
+SELECT wid, wname, department, salary
+FROM workers
+ORDER BY salary DESC;
+
+SELECT wid, wname, department, salary
+FROM workers
+ORDER BY department ASC, salary ASC;
+
+SELECT department, SUM(salary) AS total_salary
+FROM workers
+GROUP BY department;
+
+SELECT department, COUNT(*) AS emp_count
+FROM workers
+GROUP BY department;
+
+SELECT department, AVG(salary) AS avg_salary
+FROM workers
+GROUP BY department
+ORDER BY avg_salary DESC;
+
+SELECT *
+FROM workers
+ORDER BY wid
+LIMIT 5, 18446744073709551615;   
+
+SELECT *
+FROM workers
+ORDER BY wid DESC
+LIMIT 5, 10;
+
+SELECT *
+FROM workers
+ORDER BY wid
+LIMIT 10 OFFSET 5;   
+
+WITH numbered AS (
+    SELECT wid, wname, department, salary,
+           ROW_NUMBER() OVER (ORDER BY wid) AS rn
+    FROM workers
+)
+SELECT *
+FROM numbered
+WHERE rn > 5;
+
+SELECT *
+FROM workers
+WHERE wid NOT IN (
+    SELECT wid
+    FROM workers
+    ORDER BY wid
+    LIMIT 5
+);
+
+SELECT Department, AVG(Salary) AS avg_salary
+FROM Workers
+GROUP BY Department
+HAVING AVG(Salary) > 100000;
+
+SELECT Department, MAX(Salary) AS max_salary
+FROM Workers
+GROUP BY Department
+HAVING MAX(Salary) = 500000;
+
+SELECT Department, COUNT(Department) AS emp_count, SUM(Salary) AS total_salary
+FROM Workers
+GROUP BY Department
+HAVING COUNT(Department) > 1 AND SUM(Salary) > 100000;
+
+SELECT Department, AVG(Salary) AS avg_salary
+FROM Workers
+GROUP BY Department
+HAVING AVG(Salary) BETWEEN 50000 AND 200000;
