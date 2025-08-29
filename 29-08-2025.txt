@@ -1,0 +1,51 @@
+CREATE DATABASE companyDB;
+USE companyDB;
+
+CREATE TABLE Departments (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(50)
+);
+
+CREATE TABLE Employees (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(50),
+    dept_id INT
+);
+
+INSERT INTO Departments VALUES
+(10, 'HR'),
+(20, 'IT'),
+(30, 'Finance'),
+(40, 'Marketing');
+
+INSERT INTO Employees VALUES
+(1, 'Arjun', 10),
+(2, 'Meena', 20),
+(3, 'Charan', 20),
+(4, 'Ravi', NULL),  
+(5, 'Anjali', 50);   
+
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM Employees e
+INNER JOIN Departments d ON e.dept_id = d.dept_id;
+
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM Employees 
+LEFT JOIN Departments d ON e.dept_id = d.dept_id;
+
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM Employees 
+RIGHT JOIN Departments d ON e.dept_id = d.dept_id;
+
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM Employees 
+LEFT JOIN Departments d ON e.dept_id = d.dept_id
+UNION
+
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM Employees 
+RIGHT JOIN Departments d ON e.dept_id = d.dept_id;
+
+SELECT e.emp_id, e.emp_name, d.dept_name
+FROM Employees 
+CROSS JOIN Departments d;
